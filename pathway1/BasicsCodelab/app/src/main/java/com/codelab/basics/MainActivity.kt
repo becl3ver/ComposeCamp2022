@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.codelab.basics.ui.theme.BasicsCodelabTheme
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +32,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+private fun Greeting(name: String) {
+    Surface(color = MaterialTheme.colors.primary) {
+        Text (text = "Hello $name!")
+    }
 }
 
 @Preview(showBackground = true)
