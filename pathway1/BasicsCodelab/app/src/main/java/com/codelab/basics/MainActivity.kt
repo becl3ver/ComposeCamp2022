@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.codelab.basics.ui.theme.BasicsCodelabTheme
@@ -18,7 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BasicsCodelabTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
@@ -50,17 +52,28 @@ fun MyApp(
 
 @Composable
 private fun Greeting(name: String) {
+
+    val expanded = remember { mutableStateOf(false) }
+
+    val extraPadding = if (expanded.value) 48.dp else 0.dp
+
     Surface(
         color = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp)
-        ) {
-            Text(text = "Hello, ")
-            Text(text = name)
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .padding(bottom = extraPadding)
+            ) {
+                Text(text = "Hello, ")
+                Text(text = name)
+            }
+            ElevatedButton(
+                onClick = { expanded.value = !expanded.value }
+            ) {
+                Text(if (expanded.value) "Show less" else "Show more")
+            }
         }
     }
 }
