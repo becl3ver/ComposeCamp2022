@@ -33,7 +33,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Spa
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,34 +60,25 @@ class MainActivity : ComponentActivity() {
 fun SearchBar(
     modifier: Modifier = Modifier
 ) {
-    TextField(
-        value = "",
-        onValueChange = {},
-        leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = null)
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface
-        ),
-        placeholder = {
-            Text(stringResource(R.string.placeholder_search))
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .heightIn(min = 56.dp)
+    TextField(value = "", onValueChange = {}, leadingIcon = {
+        Icon(imageVector = Icons.Default.Search, contentDescription = null)
+    }, colors = TextFieldDefaults.textFieldColors(
+        backgroundColor = MaterialTheme.colors.surface
+    ), placeholder = {
+        Text(stringResource(R.string.placeholder_search))
+    }, modifier = modifier
+        .fillMaxWidth()
+        .heightIn(min = 56.dp)
     )
 }
 
 // Step: Align your body - Alignment
 @Composable
 fun AlignYourBodyElement(
-    @DrawableRes drawable: Int,
-    @StringRes text: Int,
-    modifier: Modifier = Modifier
+    @DrawableRes drawable: Int, @StringRes text: Int, modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(drawable),
@@ -108,17 +101,13 @@ fun AlignYourBodyElement(
 // Step: Favorite collection card - Material Surface
 @Composable
 fun FavoriteCollectionCard(
-    @DrawableRes drawable: Int,
-    @StringRes text: Int,
-    modifier: Modifier = Modifier
+    @DrawableRes drawable: Int, @StringRes text: Int, modifier: Modifier = Modifier
 ) {
     Surface(
-        shape = MaterialTheme.shapes.small,
-        modifier = modifier
+        shape = MaterialTheme.shapes.small, modifier = modifier
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.width(192.dp)
+            verticalAlignment = Alignment.CenterVertically, modifier = Modifier.width(192.dp)
         ) {
             Image(
                 painter = painterResource(drawable),
@@ -165,9 +154,7 @@ fun FavoriteCollectionsGrid(
     ) {
         items(favoriteCollectionsData) { item ->
             FavoriteCollectionCard(
-                drawable = item.drawable,
-                text = item.text,
-                modifier = Modifier.height(56.dp)
+                drawable = item.drawable, text = item.text, modifier = Modifier.height(56.dp)
             )
         }
     }
@@ -176,9 +163,7 @@ fun FavoriteCollectionsGrid(
 // Step: Home section - Slot APIs
 @Composable
 fun HomeSection(
-    @StringRes title: Int,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    @StringRes title: Int, modifier: Modifier = Modifier, content: @Composable () -> Unit
 ) {
     Column(modifier) {
         Text(
@@ -213,7 +198,37 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 // Step: Bottom navigation - Material
 @Composable
 private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
-    // Implement composable here
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colors.background,
+        modifier = modifier
+    ) {
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Spa,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_home))
+            },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_profile))
+            },
+            selected = false,
+            onClick = {}
+        )
+    }
 }
 
 // Step: MySoothe App - Scaffold
